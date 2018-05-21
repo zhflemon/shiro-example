@@ -62,7 +62,7 @@ public class AppDaoImpl implements AppDao {
     @Override
     public App findOne(Long appId) {
         final String sql = "select id, name, app_key, app_secret, available from sys_app where id=?";
-        List<App> appList = jdbcTemplate.query(sql, new BeanPropertyRowMapper(App.class), appId);
+		List<App> appList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<App>(App.class), appId);
         if(appList.size() == 0) {
             return null;
         }
@@ -72,7 +72,7 @@ public class AppDaoImpl implements AppDao {
     @Override
     public List<App> findAll() {
         final String sql = "select id, name, app_key, app_secret, available from sys_app";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper(App.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<App>(App.class));
     }
 
     @Override

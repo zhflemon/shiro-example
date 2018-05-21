@@ -62,7 +62,7 @@ public class UrlFilterDaoImpl implements UrlFilterDao {
     @Override
     public UrlFilter findOne(Long urlFilterId) {
         final String sql = "select id, name, url, roles, permissions from sys_url_filter where id=?";
-        List<UrlFilter> urlFilterList = jdbcTemplate.query(sql, new BeanPropertyRowMapper(UrlFilter.class), urlFilterId);
+		List<UrlFilter> urlFilterList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<UrlFilter>(UrlFilter.class), urlFilterId);
         if(urlFilterList.size() == 0) {
             return null;
         }
@@ -72,7 +72,7 @@ public class UrlFilterDaoImpl implements UrlFilterDao {
     @Override
     public List<UrlFilter> findAll() {
         final String sql = "select id, name, url, roles, permissions from sys_url_filter";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper(UrlFilter.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<UrlFilter>(UrlFilter.class));
     }
 
 }

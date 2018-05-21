@@ -63,7 +63,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findOne(Long userId) {
         String sql = "select id, organization_id, username, password, salt, role_ids as roleIdsStr, locked from sys_user where id=?";
-        List<User> userList = jdbcTemplate.query(sql, new BeanPropertyRowMapper(User.class), userId);
+		List<User> userList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<User>(User.class), userId);
         if(userList.size() == 0) {
             return null;
         }
@@ -73,14 +73,14 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> findAll() {
         String sql = "select id, organization_id, username, password, salt, role_ids as roleIdsStr, locked from sys_user";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper(User.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<User>(User.class));
     }
 
 
     @Override
     public User findByUsername(String username) {
         String sql = "select id, organization_id, username, password, salt, role_ids as roleIdsStr, locked from sys_user where username=?";
-        List<User> userList = jdbcTemplate.query(sql, new BeanPropertyRowMapper(User.class), username);
+        List<User> userList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<User>(User.class), username);
         if(userList.size() == 0) {
             return null;
         }

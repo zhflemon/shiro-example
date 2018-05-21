@@ -82,15 +82,15 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     public Set<String> findRoles(String appKey, String username) {
         User user = userService.findByUsername(username);
         if(user == null) {
-            return Collections.EMPTY_SET;
+			return Collections.emptySet();
         }
         Long appId = appService.findAppIdByAppKey(appKey);
         if(appId == null) {
-            return Collections.EMPTY_SET;
+            return Collections.emptySet();
         }
         Authorization authorization = authorizationDao.findByAppUser(appId, user.getId());
         if(authorization == null) {
-            return Collections.EMPTY_SET;
+            return Collections.emptySet();
         }
         return roleService.findRoles(authorization.getRoleIds().toArray(new Long[0]));
     }
@@ -103,15 +103,15 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     public Set<String> findPermissions(String appKey, String username) {
         User user = userService.findByUsername(username);
         if(user == null) {
-            return Collections.EMPTY_SET;
+			return Collections.emptySet();
         }
         Long appId = appService.findAppIdByAppKey(appKey);
         if(appId == null) {
-            return Collections.EMPTY_SET;
+            return Collections.emptySet();
         }
         Authorization authorization = authorizationDao.findByAppUser(appId, user.getId());
         if(authorization == null) {
-            return Collections.EMPTY_SET;
+            return Collections.emptySet();
         }
         return roleService.findPermissions(authorization.getRoleIds().toArray(new Long[0]));
     }

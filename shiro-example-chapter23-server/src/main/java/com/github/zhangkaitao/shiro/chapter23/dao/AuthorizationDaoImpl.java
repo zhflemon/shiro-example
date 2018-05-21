@@ -72,7 +72,7 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
     @Override
     public List<Authorization> findAll() {
         final String sql = "select id, user_id, app_id, role_ids as roleIdsStr from sys_user_app_roles";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper(Authorization.class));
+		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Authorization>(Authorization.class));
     }
 
 

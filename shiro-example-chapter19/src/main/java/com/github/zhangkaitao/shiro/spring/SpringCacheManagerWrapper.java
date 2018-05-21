@@ -33,13 +33,15 @@ public class SpringCacheManagerWrapper implements CacheManager {
         this.cacheManager = cacheManager;
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public <K, V> Cache<K, V> getCache(String name) throws CacheException {
         org.springframework.cache.Cache springCache = cacheManager.getCache(name);
-        return new SpringCacheWrapper(springCache);
+		return new SpringCacheWrapper(springCache);
     }
 
-    static class SpringCacheWrapper implements Cache {
+    @SuppressWarnings("rawtypes")
+	static class SpringCacheWrapper implements Cache {
         private org.springframework.cache.Cache springCache;
 
         SpringCacheWrapper(org.springframework.cache.Cache springCache) {
@@ -81,7 +83,8 @@ public class SpringCacheManagerWrapper implements CacheManager {
             throw new UnsupportedOperationException("invoke spring cache abstract size method not supported");
         }
 
-        @Override
+        @SuppressWarnings("unchecked")
+		@Override
         public Set keys() {
             if(springCache.getNativeCache() instanceof Ehcache) {
                 Ehcache ehcache = (Ehcache) springCache.getNativeCache();
@@ -90,7 +93,8 @@ public class SpringCacheManagerWrapper implements CacheManager {
             throw new UnsupportedOperationException("invoke spring cache abstract keys method not supported");
         }
 
-        @Override
+        @SuppressWarnings("unchecked")
+		@Override
         public Collection values() {
             if(springCache.getNativeCache() instanceof Ehcache) {
                 Ehcache ehcache = (Ehcache) springCache.getNativeCache();

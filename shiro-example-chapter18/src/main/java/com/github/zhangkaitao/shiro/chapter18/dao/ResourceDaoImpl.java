@@ -67,7 +67,7 @@ public class ResourceDaoImpl implements ResourceDao {
     @Override
     public Resource findOne(Long resourceId) {
         final String sql = "select id, name, type, url, permission, parent_id, parent_ids, available from sys_resource where id=?";
-        List<Resource> resourceList = jdbcTemplate.query(sql, new BeanPropertyRowMapper(Resource.class), resourceId);
+		List<Resource> resourceList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Resource>(Resource.class), resourceId);
         if(resourceList.size() == 0) {
             return null;
         }
@@ -77,7 +77,7 @@ public class ResourceDaoImpl implements ResourceDao {
     @Override
     public List<Resource> findAll() {
         final String sql = "select id, name, type, url, permission, parent_id, parent_ids, available from sys_resource order by concat(parent_ids, id) asc";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper(Resource.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Resource>(Resource.class));
     }
 
 }

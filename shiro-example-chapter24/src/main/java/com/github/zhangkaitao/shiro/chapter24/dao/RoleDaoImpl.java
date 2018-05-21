@@ -62,7 +62,7 @@ public class RoleDaoImpl implements RoleDao {
     @Override
     public Role findOne(Long roleId) {
         final String sql = "select id, role, description, resource_ids as resourceIdsStr, available from sys_role where id=?";
-        List<Role> roleList = jdbcTemplate.query(sql, new BeanPropertyRowMapper(Role.class), roleId);
+		List<Role> roleList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Role>(Role.class), roleId);
         if(roleList.size() == 0) {
             return null;
         }
@@ -72,7 +72,7 @@ public class RoleDaoImpl implements RoleDao {
     @Override
     public List<Role> findAll() {
         final String sql = "select id, role, description, resource_ids as resourceIdsStr, available from sys_role";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper(Role.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Role>(Role.class));
     }
 
 }

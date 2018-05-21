@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
     public Set<String> findRoles(String username) {
         User user =findByUsername(username);
         if(user == null) {
-            return Collections.EMPTY_SET;
+			return Collections.emptySet();
         }
         return roleService.findRoles(user.getRoleIds().toArray(new Long[0]));
     }
@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService {
     public Set<String> findPermissions(String username) {
         User user =findByUsername(username);
         if(user == null) {
-            return Collections.EMPTY_SET;
+            return Collections.emptySet();
         }
         return roleService.findPermissions(user.getRoleIds().toArray(new Long[0]));
     }
